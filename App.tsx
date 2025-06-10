@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import MainStack from './src/navigators/MainNavigator';
-import SplashScreen from './src/screens/SplashScreen';
+import {SplashScreen} from './src/screens';
 
 const App = () => {
   const [isSplash, setIsSplash] = useState(true);

@@ -2,9 +2,9 @@ import {
   View,
   Text,
   Image,
-  Touchable,
   TouchableOpacity,
   StyleSheet,
+  ImageSourcePropType,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -12,10 +12,12 @@ import {appColors} from '../../constants/appColors';
 import {appInfos} from '../../constants/appInfos';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {globalStyles} from '../../styles/globalStyle';
+import {TextComponent} from '../../components';
+import {fontFamilies} from '../../constants/fontFamilies';
 
 type CarouselProps = {
   id: string;
-  urlImg: string;
+  urlImg: ImageSourcePropType;
   title: string;
   desc: string;
 };
@@ -42,7 +44,7 @@ const carouselItems: CarouselProps[] = [
 ];
 
 const OnBoardingScreen = ({navigation}: any) => {
-  const carouselRef = useRef();
+  const carouselRef = useRef<Carousel<CarouselProps> | null>(null);
   const [indexSelected, setIndexSelected] = useState(0);
 
   const onScrollIndexChanged = (index: number) => {
@@ -52,7 +54,7 @@ const OnBoardingScreen = ({navigation}: any) => {
   const onClickNext = () => {
     if (indexSelected < carouselItems.length - 1) {
       setIndexSelected(indexSelected + 1);
-      carouselRef.current.snapToItem(indexSelected + 1);
+      carouselRef.current?.snapToItem(indexSelected + 1);
     }
 
     if (indexSelected === carouselItems.length - 1) {
@@ -63,7 +65,7 @@ const OnBoardingScreen = ({navigation}: any) => {
   const onClickSkip = () => {
     if (indexSelected > 0) {
       setIndexSelected(indexSelected - 1);
-      carouselRef.current.snapToItem(indexSelected - 1);
+      carouselRef.current?.snapToItem(indexSelected - 1);
     }
   };
 
@@ -78,26 +80,30 @@ const OnBoardingScreen = ({navigation}: any) => {
             <TouchableOpacity
               onPress={onClickSkip}
               activeOpacity={indexSelected === 0 ? 1 : 0.2}>
-              <Text
-                style={
+              <TextComponent
+                text="Skip"
+                font={fontFamilies.medium}
+                size={16}
+                styles={
                   indexSelected === 0 ? styles.unclickBtn : styles.clickBtn
-                }>
-                Skip
-              </Text>
+                }
+              />
             </TouchableOpacity>
             <Pagination
               dotsLength={carouselItems.length}
               activeDotIndex={indexSelected}
-              dotStyle={{backgroundColor: 'white'}}
-              inactiveDotStyle={{
-                backgroundColor: appColors.white,
-                opacity: 20,
-              }}
+              dotStyle={{backgroundColor: appColors.white}}
+              inactiveDotStyle={styles.inactiveDot}
             />
             <TouchableOpacity onPress={onClickNext}>
-              <Text style={styles.clickBtn}>
-                {carouselItems.length - 1 === indexSelected ? 'Login' : 'Next'}
-              </Text>
+              <TextComponent
+                text={
+                  carouselItems.length - 1 === indexSelected ? 'Login' : 'Next'
+                }
+                font={fontFamilies.medium}
+                size={16}
+                color={appColors.white}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -157,7 +163,7 @@ const styles = StyleSheet.create({
   carouselTitle: {
     fontSize: 24,
     color: appColors.white,
-    fontWeight: 500,
+    fontFamily: fontFamilies.medium,
     textAlign: 'center',
     lineHeight: 32,
   },
@@ -165,9 +171,10 @@ const styles = StyleSheet.create({
   carouselDesc: {
     fontSize: 16,
     color: appColors.white,
-    fontWeight: 300,
+    fontFamily: fontFamilies.regular,
     textAlign: 'center',
     lineHeight: 24,
+    opacity: 0.8,
   },
 
   paginationContainer: {
@@ -177,16 +184,17 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
 
+  inactiveDot: {
+    backgroundColor: appColors.white,
+    opacity: 20,
+  },
+
   clickBtn: {
     color: appColors.white,
-    fontSize: 16,
-    fontWeight: 500,
   },
 
   unclickBtn: {
     color: appColors.white,
-    fontSize: 16,
-    fontWeight: 500,
     opacity: 0.5,
   },
 });

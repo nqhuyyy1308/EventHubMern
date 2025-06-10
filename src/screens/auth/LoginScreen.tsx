@@ -1,5 +1,6 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {ButtonComponent} from '../../components';
 
 const LoginScreen = ({navigation}: any) => {
   const onClickNext = () => {
@@ -13,6 +14,11 @@ const LoginScreen = ({navigation}: any) => {
         onPress={onClickNext}>
         <Text>Login</Text>
       </TouchableOpacity>
+      <ButtonComponent
+        text={'LOGINNNN'}
+        iconEnd={<Text>icon</Text>}
+        type="link"
+      />
     </View>
   );
 };
