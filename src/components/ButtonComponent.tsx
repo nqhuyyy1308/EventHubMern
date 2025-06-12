@@ -14,7 +14,6 @@ interface Props {
   textColor?: string;
   textStyles?: StyleProp<TextStyle>;
   onPress?: () => void;
-  width?: number;
 }
 
 const ButtonComponent = (props: Props) => {
@@ -28,14 +27,13 @@ const ButtonComponent = (props: Props) => {
     textStyles,
     onPress,
     iconEnd,
-    width,
   } = props;
   return type === 'primary' ? (
     <TouchableOpacity
       onPress={onPress}
       style={[
         globalStyles.button,
-        {backgroundColor: color ?? appColors.primary, width: width ?? 100},
+        {backgroundColor: color ?? appColors.primary},
         styles,
       ]}>
       {iconStart}
@@ -56,7 +54,6 @@ const ButtonComponent = (props: Props) => {
           backgroundColor: color ?? appColors.white,
           borderWidth: 1,
           borderColor: appColors.primary,
-          width: width ?? 150,
         },
         styles,
       ]}>
@@ -75,7 +72,7 @@ const ButtonComponent = (props: Props) => {
       style={[
         styles,
         globalStyles.button,
-        {backgroundColor: 'transparent', width: width ?? 150},
+        {backgroundColor: color ?? appColors.white},
       ]}>
       {iconStart}
       <TextComponent
