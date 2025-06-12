@@ -13,7 +13,7 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: appColors.white,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: 32,
   },
 
   text: {
