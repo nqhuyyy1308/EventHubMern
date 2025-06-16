@@ -2,7 +2,14 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
 import {NavigationContainer} from '@react-navigation/native';
-import {LoginScreen, OnBoardingScreen} from '../screens';
+import {
+  ForgotScreen,
+  HomeScreen,
+  LoginScreen,
+  OnBoardingScreen,
+  RegisterScreen,
+  VerifycationScreen,
+} from '../screens';
 
 const MainStack = () => {
   const Stack = createNativeStackNavigator();
@@ -17,6 +24,17 @@ const MainStack = () => {
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
+          options={{gestureEnabled: false}}
+        />
+        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Stack.Screen name="ForgotScreen" component={ForgotScreen} />
+        <Stack.Screen
+          name="VerifycationScreen"
+          component={VerifycationScreen}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
           options={{gestureEnabled: false}}
         />
         <Stack.Screen name="HomeTab" component={TabNavigator} />
