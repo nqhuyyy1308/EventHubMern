@@ -12,6 +12,7 @@ interface Props {
   font?: string;
   styles?: StyleProp<TextStyle>;
   title?: boolean;
+  lineHeight?: number;
 }
 
 const TextComponent = (props: Props) => {
@@ -22,10 +23,11 @@ const TextComponent = (props: Props) => {
         {
           color: props.color ?? appColors.text,
           fontSize: props.size ?? (props.title ? 24 : 14),
+          lineHeight: props.lineHeight ?? (props.title ? 32 : 28),
           flex: props.flex ?? 0,
           fontFamily:
             props.font ??
-            (props.title ? fontFamilies.bold : fontFamilies.regular),
+            (props.title ? fontFamilies.medium : fontFamilies.regular),
         },
         props.styles,
       ]}>
